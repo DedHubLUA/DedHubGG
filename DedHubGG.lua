@@ -1,36 +1,31 @@
--- [Key UI для Roblox Executor]
--- GUI на основе Drawing API или внутрення функц. GUI библиотеки экзекутора
+-- DedHub Key System (Simple Version)
 
-local correctKey = "OWNER-3740054f89a4d5dde64c4d0f88d1c085"
+local correctKey = "OWNER-3740054f89a4d5dde64c4d0f88d1c085" -- твій ключ
 
-local function showMainMenu()
-    print("Добро пожаловать! У вас есть доступ.")
-    print("[1] Нажмите для запуска скрипта")
-
-    -- Пример скрипта (можно заменить на расшифрованный или загрузку с сайта)
-    if writefile then
-        writefile("my_exec.txt", "Executed at " .. os.date())
-    end
-
-    loadstring("print('Скрипт успешно выполнен!')")()
+function showMainMenu()
+    print("✔ Access granted! Welcome to DedHub.")
+    print("→ Executing script...")
+    
+    -- твій чит-код або будь-який скрипт нижче
+    loadstring("print('💥 DedHub loaded successfully!')")()
 end
 
-local function getKey()
-    setclipboard("https://example.com/getkey") -- замените на свой URL
-    print("Ключ скопирован! Перейдите на сайт.")
+function getKey()
+    setclipboard("https://yourkeysite.com/getkey") -- заміни на свій сайт
+    print("🔗 Link copied to clipboard! Visit the site to get your key.")
 end
 
-local function checkKey(userKey)
+function checkKey(userKey)
     if userKey == correctKey then
         showMainMenu()
     else
-        print("Неверный ключ!")
+        print("❌ Invalid key! Please try again.")
     end
 end
 
--- Псевдо-GUI имитация
-print("Введите ключ:")
-local input = tostring(rconsoleread()) -- или другой способ получения ввода
+-- Головне меню вводу
+print("🔑 Enter your key or type 'getkey':")
+local input = tostring(rconsoleread()) -- для Synapse/Xenny/Fluxus та інших
 
 if input == "getkey" then
     getKey()
