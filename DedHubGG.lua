@@ -1,63 +1,77 @@
--- Basic Key System GUI (works in Synapse, Fluxus, Delta)
+-- Создание экрана
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "DedHub"
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-local correctKey = "OWNER-1234567890abcdef"
+-- Основная панель
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Size = UDim2.new(0, 600, 0, 400)
+MainFrame.Position = UDim2.new(0.2, 0, 0.2, 0)
+MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+MainFrame.BorderSizePixel = 0
+MainFrame.Parent = ScreenGui
 
--- Створюємо меню
-local gui = Instance.new("ScreenGui", game.CoreGui)
-local frame = Instance.new("Frame", gui)
-frame.Size = UDim2.new(0, 300, 0, 150)
-frame.Position = UDim2.new(0.5, -150, 0.5, -75)
-frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-frame.BorderSizePixel = 0
+-- Название и версия
+local Title = Instance.new("TextLabel")
+Title.Text = "Ded Hub  |  Версия 1.0"
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Font = Enum.Font.SourceSansBold
+Title.TextSize = 24
+Title.Parent = MainFrame
 
-local title = Instance.new("TextLabel", frame)
-title.Text = "Enter Key"
-title.Size = UDim2.new(1, 0, 0, 30)
-title.TextColor3 = Color3.new(1, 1, 1)
-title.BackgroundTransparency = 1
-title.Font = Enum.Font.Gotham
-title.TextSize = 20
+-- Боковая панель
+local SideBar = Instance.new("Frame")
+SideBar.Size = UDim2.new(0, 150, 1, -40)
+SideBar.Position = UDim2.new(0, 0, 0, 40)
+SideBar.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+SideBar.BorderSizePixel = 0
+SideBar.Parent = MainFrame
 
-local box = Instance.new("TextBox", frame)
-box.PlaceholderText = "OWNER-XXXXXXXXXX"
-box.Size = UDim2.new(1, -20, 0, 30)
-box.Position = UDim2.new(0, 10, 0, 40)
-box.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-box.TextColor3 = Color3.new(1, 1, 1)
-box.Font = Enum.Font.Gotham
-box.TextSize = 16
+-- Кнопка Easter
+local EasterButton = Instance.new("TextButton")
+EasterButton.Text = "Easter"
+EasterButton.Size = UDim2.new(1, 0, 0, 50)
+EasterButton.Position = UDim2.new(0, 0, 0, 0)
+EasterButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+EasterButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+EasterButton.Font = Enum.Font.SourceSans
+EasterButton.TextSize = 20
+EasterButton.Parent = SideBar
 
-local enter = Instance.new("TextButton", frame)
-enter.Text = "Enter"
-enter.Size = UDim2.new(0.5, -15, 0, 30)
-enter.Position = UDim2.new(0, 10, 0, 80)
-enter.BackgroundColor3 = Color3.fromRGB(40, 160, 40)
-enter.TextColor3 = Color3.new(1, 1, 1)
-enter.Font = Enum.Font.Gotham
-enter.TextSize = 16
+-- Панель для кнопки Easter Shop
+local EasterPanel = Instance.new("Frame")
+EasterPanel.Size = UDim2.new(0, 450, 1, -40)
+EasterPanel.Position = UDim2.new(0, 150, 0, 40)
+EasterPanel.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+EasterPanel.Visible = false
+EasterPanel.Parent = MainFrame
 
-local getKey = Instance.new("TextButton", frame)
-getKey.Text = "Get Key"
-getKey.Size = UDim2.new(0.5, -15, 0, 30)
-getKey.Position = UDim2.new(0.5, 5, 0, 80)
-getKey.BackgroundColor3 = Color3.fromRGB(60, 60, 200)
-getKey.TextColor3 = Color3.new(1, 1, 1)
-getKey.Font = Enum.Font.Gotham
-getKey.TextSize = 16
+-- Кнопка Easter Shop
+local EasterShopButton = Instance.new("TextButton")
+EasterShopButton.Text = "Easter Shop"
+EasterShopButton.Size = UDim2.new(0, 200, 0, 50)
+EasterShopButton.Position = UDim2.new(0, 20, 0, 20)
+EasterShopButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+EasterShopButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+EasterShopButton.Font = Enum.Font.SourceSans
+EasterShopButton.TextSize = 18
+EasterShopButton.Parent = EasterPanel
 
--- Обробка натискань
-enter.MouseButton1Click:Connect(function()
-    if box.Text == correctKey then
-        frame:Destroy()
-        loadstring("print('✅ Script loaded!')")()
-    else
-        box.Text = ""
-        box.PlaceholderText = "❌ Invalid Key"
-    end
-end)
+-- Метка "don't work"
+local NotWorkingLabel = Instance.new("TextLabel")
+NotWorkingLabel.Text = "don't work"
+NotWorkingLabel.Size = UDim2.new(0, 200, 0, 30)
+NotWorkingLabel.Position = UDim2.new(0, 20, 0, 80)
+NotWorkingLabel.BackgroundTransparency = 1
+NotWorkingLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+NotWorkingLabel.Font = Enum.Font.SourceSansItalic
+NotWorkingLabel.TextSize = 16
+NotWorkingLabel.Parent = EasterPanel
 
-getKey.MouseButton1Click:Connect(function()
-    setclipboard("https://yourkeysite.com") -- заміни на свій сайт
-    box.Text = ""
-    box.PlaceholderText = "🔗 Link copied!"
+-- Функциональность кнопки Easter
+EasterButton.MouseButton1Click:Connect(function()
+	EasterPanel.Visible = not EasterPanel.Visible
 end)
