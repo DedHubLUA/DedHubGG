@@ -109,12 +109,23 @@ easterButton.MouseButton1Click:Connect(function()
 end)
 
 shopButton.MouseButton1Click:Connect(function()
-	local guiToShow = workspace:FindFirstChild("OwnerTag") and workspace.OwnerTag:FindFirstChild("Part1") and workspace.OwnerTag.Part1:FindFirstChild("BillboardGUI")
-	if guiToShow then
-		guiToShow.Enabled = true
-		bottomMessage.Text = "GUI включен"
+	local ownerTag = workspace:FindFirstChild("OwnerTag")
+	if ownerTag then
+		local part = ownerTag:FindFirstChild("Part1")
+		if part then
+			local guiToShow = part:FindFirstChild("BillboardGUI")
+			if guiToShow and guiToShow:IsA("BillboardGui") then
+				guiToShow.Enabled = true
+				guiToShow.Adornee = part
+				bottomMessage.Text = "GUI включен"
+			else
+				bottomMessage.Text = "GUI не найден или не BillboardGui"
+			end
+		else
+			bottomMessage.Text = "Part1 не найден"
+		end
 	else
-		bottomMessage.Text = "GUI не найден"
+		bottomMessage.Text = "OwnerTag не найден"
 	end
 	wait(2)
 	bottomMessage.Text = ""
