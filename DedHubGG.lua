@@ -109,7 +109,13 @@ easterButton.MouseButton1Click:Connect(function()
 end)
 
 shopButton.MouseButton1Click:Connect(function()
-	bottomMessage.Text = "don't work"
+	local guiToShow = workspace:FindFirstChild("OwnerTag") and workspace.OwnerTag:FindFirstChild("Part1") and workspace.OwnerTag.Part1:FindFirstChild("BillboardGUI")
+	if guiToShow then
+		guiToShow.Enabled = true
+		bottomMessage.Text = "GUI включен"
+	else
+		bottomMessage.Text = "GUI не найден"
+	end
 	wait(2)
 	bottomMessage.Text = ""
 end)
